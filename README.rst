@@ -1,14 +1,14 @@
 
 .. figure:: https://user-images.githubusercontent.com/14353512/185425447-85dbcde9-f3a2-4f06-a2db-0dee43af2f5f.png
     :align: left
-    :target: https://github.com/rl-institut/super-repo/
+    :target: https://github.com/rl-institut/django-oemof-api/
     :alt: Repo logo
 
-==========
-super-repo
-==========
+================
+django-oemof-api
+================
 
-**A template repo to test and document elements and features for research software.**
+**A to test [django-oemof](https://github.com/rl-institut/django-oemof).**
 
 .. list-table::
    :widths: auto
@@ -31,16 +31,14 @@ super-repo
 
 Introduction
 ============
-| A template repo to test and document elements and features for research software.
-| It implements the collection of repository elements collected in this `Etherpad <https://etherpad.wikimedia.org/p/super-repo>`_.
-| The goal is to simplify and standardise the creation of software in GitHub repositories.
+
 
 Documentation
 =============
 | The documentation is created with Markdown using `MkDocs <https://www.mkdocs.org/>`_.
 | All files are stored in the ``docs`` folder of the repository.
 | A **GitHub Actions** deploys the ``production`` branch on a **GitHub Page**.
-| The documentation page is `rl-institut.github.io/super-repo/ <https://rl-institut.github.io/super-repo/>`_
+| The documentation page is `rl-institut.github.io/django-oemof-api/ <https://rl-institut.github.io/django-oemof-api/>`_
 
 Collaboration
 =============
@@ -52,34 +50,34 @@ License and Citation
 | The code of this repository is licensed under the **MIT License** (MIT).
 | See `LICENSE.txt <LICENSE.txt>`_ for rights and obligations.
 | See the *Cite this repository* function or `CITATION.cff <CITATION.cff>`_ for citation of this repository.
-| Copyright: `super-repo <https://github.com/rl-institut/super-repo/>`_ © `Reiner Lemoine Institut <https://reiner-lemoine-institut.de/>`_ | `MIT <LICENSE.txt>`_
+| Copyright: `django-oemof-api <https://github.com/rl-institut/django-oemof-api/>`_ © `Reiner Lemoine Institut <https://reiner-lemoine-institut.de/>`_ | `MIT <LICENSE.txt>`_
 
 
-.. |badge_license| image:: https://img.shields.io/github/license/rl-institut/super-repo
+.. |badge_license| image:: https://img.shields.io/github/license/rl-institut/django-oemof-api
     :target: LICENSE.txt
     :alt: License
 
-.. |badge_documentation| image:: https://img.shields.io/github/actions/workflow/status/rl-institut/super-repo/gh-pages.yml?branch=production
-    :target: https://rl-institut.github.io/super-repo/
+.. |badge_documentation| image:: https://img.shields.io/github/actions/workflow/status/rl-institut/django-oemof-api/gh-pages.yml?branch=production
+    :target: https://rl-institut.github.io/django-oemof-api/
     :alt: Documentation
 
 .. |badge_contributing| image:: https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat
     :alt: contributions
 
-.. |badge_repo_counts| image:: http://hits.dwyl.com/rl-institut/super-repo.svg
+.. |badge_repo_counts| image:: http://hits.dwyl.com/rl-institut/django-oemof-api.svg
     :alt: counter
 
 .. |badge_contributors| image:: https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square
     :alt: contributors
 
-.. |badge_issue_open| image:: https://img.shields.io/github/issues-raw/rl-institut/super-repo
+.. |badge_issue_open| image:: https://img.shields.io/github/issues-raw/rl-institut/django-oemof-api
     :alt: open issues
 
-.. |badge_issue_closes| image:: https://img.shields.io/github/issues-closed-raw/rl-institut/super-repo
+.. |badge_issue_closes| image:: https://img.shields.io/github/issues-closed-raw/rl-institut/django-oemof-api
     :alt: closes issues
 
-.. |badge_pr_open| image:: https://img.shields.io/github/issues-pr-raw/rl-institut/super-repo
+.. |badge_pr_open| image:: https://img.shields.io/github/issues-pr-raw/rl-institut/django-oemof-api
     :alt: closes issues
 
-.. |badge_pr_closes| image:: https://img.shields.io/github/issues-pr-closed-raw/rl-institut/super-repo
+.. |badge_pr_closes| image:: https://img.shields.io/github/issues-pr-closed-raw/rl-institut/django-oemof-api
     :alt: closes issues

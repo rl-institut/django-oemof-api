@@ -4,8 +4,8 @@ site_url:
 site_description: Write your documentation in Markdown and create a static page for your developer and user community
 
 # Repository
-repo_name: rl-institut/super-repo
-repo_url: https://github.com/rl-institut/super-repo
+repo_name: rl-institut/django-oemof-api
+repo_url: https://github.com/rl-institut/django-oemof-api
 docs_dir: docs
 
 # Configuration

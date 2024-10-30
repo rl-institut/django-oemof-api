@@ -22,12 +22,12 @@ It always has the format `YYYY-MM-DD`, e.g. `2022-05-16`.
 Following the Semantic Versioning, different workflows for Major, Minor, or Patch
 releases are possible. <br>
 For Major and Minor releases, follow the complete workflow.<br>
-For a **Patch Release** (Hotfix), start at [section 3](https://github.com/rl-institut/super-repo/blob/production/RELEASE_PROCEDURE.md#4--create-a-draft-github-release).
+For a **Patch Release** (Hotfix), start at [section 3](https://github.com/rl-institut/django-oemof-api/blob/production/RELEASE_PROCEDURE.md#4--create-a-draft-github-release).
 
 ### 1. 🐙 Create a `GitHub Project`
-* Create [New classic project](https://github.com/rl-institut/super-repo/projects?type=classic)
+* Create [New classic project](https://github.com/rl-institut/django-oemof-api/projects?type=classic)
 * Use the project template *Automated kanban with reviews*
-* Named `super-repo-v0.1.0`
+* Named `django-oemof-api-v0.1.0`
 * Add a meaningful description
 * Track project progress
 
@@ -50,7 +50,7 @@ For a **Patch Release** (Hotfix), start at [section 3](https://github.com/rl-ins
 
 ### 4. 🐙 Create a `Draft GitHub Release`
 * Start here for a **Patch Release** (Hotfix)
-* [Draft a new release](https://github.com/rl-institut/super-repo/releases/new)
+* [Draft a new release](https://github.com/rl-institut/django-oemof-api/releases/new)
 * Enter the release version number `0.1.0` as title
 * Summarize key changes from changelog in the description
 ```
@@ -60,9 +60,9 @@ For a **Patch Release** (Hotfix), start at [section 3](https://github.com/rl-ins
 ### Removed
 ```
 * Add a link to the `📝CHANGELOG.md`
-    * `**Complete changelog:** [CHANGELOG.md](https://github.com/rl-institut/super-repo/blob/production/CHANGELOG.md)`
+    * `**Complete changelog:** [CHANGELOG.md](https://github.com/rl-institut/django-oemof-api/blob/production/CHANGELOG.md)`
 * Add a link to compare versions
-    * `**Compare versions:** [0.1.0 - 0.2.0](https://github.com/rl-institut/super-repo/compare/v0.1.0...v0.2.0)`
+    * `**Compare versions:** [0.1.0 - 0.2.0](https://github.com/rl-institut/django-oemof-api/compare/v0.1.0...v0.2.0)`
 * **Save draft**
 
 ### 5. 💠 Create a `release` branch
@@ -98,7 +98,7 @@ For a **Patch Release** (Hotfix), start at [section 3](https://github.com/rl-ins
 ### 8. 💠 Set the `Git Tag`
 * Checkout `production` branch and pull
 * Check existing tags `git tag -n`
-* Create new tag: `git tag -a v0.1.0 -m "super-repo Minor Release v0.1.0"`
+* Create new tag: `git tag -a v0.1.0 -m "django-oemof-api Minor Release v0.1.0"`
 * This commit will be the final version for the release, breath three times and check again
 * Push tag: `git push --tags`
 
