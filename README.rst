@@ -32,6 +32,42 @@ django-oemof-api
 Introduction
 ============
 
+1. install requirements with
+
+```
+    pip install -r requirements
+```
+
+2. setup a postgresql database and provide the following environment variables
+
+```
+SQL_ENGINE="django.db.backends.postgresql"
+SQL_DATABASE="name_of_your_database"
+SQL_USER="name_of_your_user"
+SQL_PASSWORD="pw_of_your_user"
+SQL_HOST="localhost"
+SQL_PORT="postgresql port, usually 5434"
+
+# replace 'localhost' by the name of the container if using docker
+CELERY_BROKER_URL="redis://localhost:6379/0"
+CELERY_RESULT_BACKEND="redis://localhost:6379/0"
+
+```
+
+3. run migrations
+
+```
+    python manage.py migrate
+```
+
+4. run the server
+
+```
+    python manage.py runserver
+```
+
+4. visit the webapp at 127.0.0.1:8000/oemof
+
 
 Documentation
 =============
