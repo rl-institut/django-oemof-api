@@ -29,10 +29,16 @@ django-oemof-api
     :local:
     :backlinks: top
 
+Requirements
+============
+python 3.10
+postgresql 14 or higher
+
 Introduction
 ============
+0. create a virtual environment with python 3.10
 
-1. install requirements with
+1. install requirements in the virtual environment with
 
 ```
     pip install -r requirements
@@ -67,6 +73,45 @@ CELERY_RESULT_BACKEND="redis://localhost:6379/0"
 ```
 
 4. visit the webapp at 127.0.0.1:8000/oemof
+
+In order to simulate a scenario from a datapackage you should place datapackages in the django_oemof_api/data/oemof folder.
+
+One this is done, open a new terminal with the same virtual environment and make sure you provide those two environment variables as well
+
+```
+CELERY_BROKER_URL="redis://localhost:6379/0"
+CELERY_RESULT_BACKEND="redis://localhost:6379/0"
+
+```
+Then start the celery worker with
+
+```
+celery -A django_oemof_api.celery worker --loglevel=info -E
+```
+
+
+Finally, you can send a post request from a third terminal
+
+```
+import requests
+import json
+
+HOST = "http://127.0.0.1:8000"
+SIMULATE_URL = f"{HOST}/oemof/simulate"
+
+payload = {
+    "scenario": "<name of a scenario datapackage within data/oemof folder>",
+    "parameters": json.dumps({"some": "paremeters"}),
+}
+
+with requests.session() as client:
+    req = client.post(
+        SIMULATE_URL,
+        data=payload,
+    )
+    answer = json.loads(req.text)
+    print(f"{SIMULATE_URL}}?task_id={answer['task_id']}")
+```
 
 
 Documentation
