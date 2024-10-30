@@ -19,6 +19,7 @@ env = environ.Env()
 # Build paths inside the project like this: ROOT_DIR / 'subdir'.
 ROOT_DIR = Path(__file__).resolve().parent.parent
 APPS_DIR = ROOT_DIR / "django_oemof_api"
+DATA_DIR = APPS_DIR / "data"
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -42,6 +43,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django_oemof",
 ]
 
 MIDDLEWARE = [
@@ -57,6 +59,12 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = "django_oemof_api.urls"
 
+# MEDIA
+# ------------------------------------------------------------------------------
+# https://docs.djangoproject.com/en/dev/ref/settings/#media-root
+MEDIA_ROOT = str(DATA_DIR)
+# https://docs.djangoproject.com/en/dev/ref/settings/#media-url
+MEDIA_URL = "/media/"
 
 
 TEMPLATES = [
@@ -79,12 +87,21 @@ WSGI_APPLICATION = "django_oemof_api.wsgi.application"
 
 
 # Database
-# https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-
-DATABASES = {
-    "default": {"ENGINE": "django.db.backends.sqlite3", "NAME": ROOT_DIR / "db.sqlite3"}
-}
-
+# ------------------------------------------------------------------------------
+# https://docs.djangoproject.com/en/dev/ref/settings/#databases
+if os.environ.get("DATABASE_URL"):
+    DATABASES = {"default": env.db("DATABASE_URL")}
+else:
+    POSTGRES_ENGINE = env.str("SQL_ENGINE")
+    POSTGRES_USER = env.str("SQL_USER")
+    POSTGRES_PASSWORD = env.str("SQL_PASSWORD")
+    POSTGRES_HOST = env.str("SQL_HOST")
+    POSTGRES_PORT = env.str("SQL_PORT")
+    POSTGRES_DB = env.str("SQL_DATABASE")
+    DATABASE_URL = f"{POSTGRES_ENGINE}://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_HOST}:{POSTGRES_PORT}/{POSTGRES_DB}"
+    os.environ["DATABASE_URL"] = DATABASE_URL
+    DATABASES = {"default": env.db("DATABASE_URL")}
+DATABASES["default"]["ATOMIC_REQUESTS"] = True
 
 
 # Password validation
