@@ -90,9 +90,7 @@ WSGI_APPLICATION = "django_oemof_api.wsgi.application"
 # Database
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
-if os.environ.get("DATABASE_URL"):
-    DATABASES = {"default": env.db("DATABASE_URL")}
-else:
+if os.environ.get("SQL_ENGINE"):
     POSTGRES_ENGINE = env.str("SQL_ENGINE")
     POSTGRES_USER = env.str("SQL_USER")
     POSTGRES_PASSWORD = env.str("SQL_PASSWORD")
@@ -102,6 +100,11 @@ else:
     DATABASE_URL = f"{POSTGRES_ENGINE}://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_HOST}:{POSTGRES_PORT}/{POSTGRES_DB}"
     os.environ["DATABASE_URL"] = DATABASE_URL
     DATABASES = {"default": env.db("DATABASE_URL")}
+else:
+    DATABASES = {
+        "default": {"ENGINE": "django.db.backends.sqlite3", "NAME": ROOT_DIR / "db.sqlite3"}
+    }
+
 DATABASES["default"]["ATOMIC_REQUESTS"] = True
 
 
