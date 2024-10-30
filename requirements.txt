@@ -1,3 +1,3 @@
-django_oemof
-celery
-djangorestframework
+git+https://github.com/rl-institut/django-oemof.git@master#egg=django_oemof
+git+https://github.com/oemof/oemof-tabular.git@131f2506bd47fb998c98a59878cce774adf0d0da#egg=oemof.tabular
+redis
