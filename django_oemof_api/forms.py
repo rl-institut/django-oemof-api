@@ -14,5 +14,6 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 from django.utils.translation import gettext_lazy as _
 from django.conf import settings as django_settings
 
+
 class UploadFileForm(forms.Form):
     file = forms.FileField()

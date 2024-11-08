@@ -19,12 +19,13 @@ from django.contrib import messages
 from django.conf import settings
 from django.core.files.storage import default_storage
 from django.core.files.base import ContentFile
+from rest_framework.views import APIView
 
 # from jsonview.decorators import json_view
 from datetime import datetime
 from django.db.models import Q
 from django.shortcuts import render
-from .forms import QueryResultsForm, UploadFileForm
+from .forms import UploadFileForm
 import traceback
 
 logger = logging.getLogger(__name__)
@@ -57,26 +58,9 @@ def unzip_scenario_datapackage(zip_file):
                 outfile.close()
 
 
-# @login_required
-@require_http_methods(["GET", "POST"])
-def add_datapackage(request):
-    if request.method == "POST":
-        form = UploadFileForm(request.POST, request.FILES)
-        if form.is_valid():
-            zf = form.cleaned_data["file"]
-            name = zf.name
-            print(zf.name)
-            # TODO maybe one can take the fileinmemomry here directly and avoid saving the .zip file
-            # store datapakage as zip file
-            default_storage.save(f"oemof/{name}", ContentFile(zf.read()))
-            zf.close()
-            unzip_scenario_datapackage(name)
-            # delete the zip file
-            default_storage.delete(f"oemof/{name}")
-
-        return HttpResponseRedirect(reverse("add_datapackage"))
-
-    if request.method == "GET":
+class AddDatapackageView(APIView):
+    @staticmethod
+    def get(request):
         form = UploadFileForm()
 
         datapackages = default_storage.listdir("oemof")[0]
@@ -87,6 +71,25 @@ def add_datapackage(request):
             {"form": form, "datapackages": datapackages},
         )
 
+    @staticmethod
+    def post(request):
+        form = UploadFileForm(request.POST, request.FILES)
+        if form.is_valid():
+            zf = form.cleaned_data["file"]
+            name = zf.name
+            # TODO maybe one can take the fileinmemomry here directly and avoid saving the .zip file
+            # store datapakage as zip file
+            default_storage.save(f"oemof/{name}", ContentFile(zf.read()))
+            zf.close()
+            unzip_scenario_datapackage(name)
+            # delete the zip file
+            default_storage.delete(f"oemof/{name}")
+            messages.add_message(
+                request, messages.INFO, f"Successfully added {name} scenario"
+            )
+
+        return HttpResponseRedirect(reverse("add_datapackage"))
+
 
 @require_http_methods(["POST"])
 def delete_datapackage(request):
@@ -95,7 +98,12 @@ def delete_datapackage(request):
         scenario_path = os.path.join(settings.MEDIA_ROOT, "oemof", scenario_name)
         if os.path.exists(scenario_path):
             shutil.rmtree(scenario_path)
-            # default_storage.delete(f"oemof/{scenario_name}")
+            messages.add_message(
+                request, messages.INFO, f"Successfully deleted '{name}' scenario"
+            )
+        else:
+            messages.add_message(
+                request, messages.ERROR, f"Scenario '{name}' does not exist"
+            )
 
         return HttpResponseRedirect(reverse("add_datapackage"))
-
