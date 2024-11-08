@@ -17,8 +17,12 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path, include
+from .views import AddDatapackageView, delete_datapackage
+
 
 urlpatterns = [
+    path("add_datapackage", AddDatapackageView.as_view(), name="add_datapackage"),
+    path("delete_datapackage", delete_datapackage, name="delete_datapackage"),
     path("admin/", admin.site.urls),
     path("oemof/", include("django_oemof.urls")),
 ]

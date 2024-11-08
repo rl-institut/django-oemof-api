@@ -1,0 +1,64 @@
+{% load static %}
+
+<!DOCTYPE HTML>
+<html>
+ <head>
+   <link rel="shortcut icon" href="{% static 'demo/favicon.png' %}" type="image/x-icon"></link>
+   <title>Test Zip view</title>
+ </head>
+ <body>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/2.20.0/plotly.min.js" integrity="sha512-tuzZby9zsxdCMgqKMHo+ObEWrfBTFlKZ7yIHSow5IYbr0JseLNTXm37NSn0rrWVbvKMfvGUCSm5L1sK9QGuLyw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+   <!--script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/1.33.1/plotly.min.js" integrity="sha512-V0j9LhrK9IMNdFYZqh+IqU4cjo7wdxyHNyH+L0td4HryBuZ7Oq6QxP2/CWr6TituX31+gv5PnolvERuTbz8UNA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script-->
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+   <header>
+     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+       <div class="navbar-nav">
+         {% block demo_items %}
+         {% block demo_menu_items %}
+				 {% endblock demo_menu_items %}
+				 {% endblock demo_items %}
+
+       </div>
+     </nav>
+   </header>
+   <main>
+     {% block main_top%}{% endblock%}
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+     <div class="container">
+			 	<h2>Existing scenarios</h2>
+			 	<ul>
+					{% for datapackage in datapackages%}
+					<li>{{datapackage}}</li>
+					{% endfor %}
+				</ul>
+
+			 <h2>Delete scenario</h2>
+				 <form method="POST" action="{% url 'delete_datapackage' %}">
+					 {% csrf_token %}
+					 <input type="text" name="scenario">
+					 <input type="submit" value="Delete">
+				 </form>
+
+			 <h2>Upload a scenario as zip file</h2>
+
+				 <form method="POST" action="{% url 'add_datapackage' %}" enctype="multipart/form-data">
+					 {% csrf_token %}
+					 {{ form }}
+					 <!--input id="zipfile" type="file" name="file" accept="zip,application/octet-stream,application/zip,application/x-zip,application/x-zip-compressed"-->
+					 <input type="submit" value="Save">
+				 </form>
+       {% block content%}{% endblock%}
+     </div>
+   </main>
+   {% block footer%}
+   {% endblock%}
+ </body>
+ {% block post_body%}{% endblock post_body%}
+</html>
